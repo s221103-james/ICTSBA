@@ -1,0 +1,25 @@
+why dont use py dictionary?
+show i know the hashmap
+it index start with 8, i already knew that the library system will have a lit of data ~20k
+so i can avoid the python keep increasing the index which is slow
+
+
+json: allow complicated data structure, and it is simple to dump data into it, we can type a file with high readablilty in it easit(indent=3)
+txt: trash
+csv: only linear data structure
+
+
+{
+                "bookcode": book_temp.bookcode,
+                "bookname":book_temp.bookname,
+                "isbn":book_temp.isbn,
+                "author":book_temp.author,
+                "publisher":book_temp.publisher,
+                "bookcopies":book_temp.bookcopies,
+                "language":book_temp.language,
+                "publishedDate":book_temp.publishedDate,
+                "categories":book_temp.categories,
+                "averageRating":book_temp.averageRating,
+                "pageCount":book_temp.pageCount,
+                "description":book_temp.description
+                }
