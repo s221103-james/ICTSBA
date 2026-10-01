@@ -153,64 +153,61 @@ def AddBook():
         choice = input("please input your option by typing the number")
         match choice:
             case n if n == "1":
-                    checkindex = input("please input the index of the book that you can to check(one at a time)")
+                    checkindex = int(input("please input the index of the book that you can to check(one at a time)"))
                     print(
                         f"""
-book name: {books[checkindex-1]["bookname"]}
-isbn code: {books[checkindex-1]["isbn"]}
-book code: {books[checkindex-1]["boookcode"]}
-author: {books[checkindex-1]["author"]}
-publisher: {books[checkindex-1]["publisher"]}
-book copies: {books[checkindex-1]["bookcopies"]}
-book language: {books[checkindex-1]["language"]}
-published date: {books[checkindex-1]["publisheddate"]}
-categories: {books[checkindex-1]["categories"]}
-average rating: {books[checkindex-1]["averageRating"]}
-average rating: {books[checkindex-1]["averageRating"]}
-page count: {books[checkindex-1]["pageCount"]}
-desciption: {books[checkindex-1]["description"]}
+book name: {books[checkindex-1].bookname}
+isbn code: {books[checkindex-1].isbn}
+book code: {books[checkindex-1].bookcode}
+author: {books[checkindex-1].author}
+publisher: {books[checkindex-1].publisher}
+book copies: {books[checkindex-1].bookcopies}
+book language: {books[checkindex-1].language}
+published date: {books[checkindex-1].publishedDate}
+categories: {books[checkindex-1].categories}
+average rating: {books[checkindex-1].averageRating}
+page count: {books[checkindex-1].pageCount}
+desciption: {books[checkindex-1].description}
 """
                     )
             case n if n == "2":
-                checkindex = input("please input the index of the book that you can to check(one at a time)")
+                checkindex = int(input("please input the index of the book that you can to check(one at a time)"))
                 print("type N/A if there is no need to change the data")
                 tempbookinfo = {}
                 tempbookinfo["bookname"] = input(f"book name: {books[checkindex-1].bookname}")
                 tempbookinfo["isbn"] = input(f"isbn code: {books[checkindex-1].isbn}")
-                tempbookinfo["bookcode"] = input(f"book code: {books[checkindex-1].boookcode}")
+                tempbookinfo["bookcode"] = input(f"book code: {books[checkindex-1].bookcode}")
                 tempbookinfo["author"] = input(f"author: {books[checkindex-1].author}")
                 tempbookinfo["publisher"] = input(f"publisher: {books[checkindex-1].publisher}")
                 tempbookinfo["bookcopies"] = input(f"book copies: {books[checkindex-1].bookcopies}")
                 tempbookinfo["language"] = input(f"book language: {books[checkindex-1].language}")
-                tempbookinfo["publisheddate"] = input(f"published date: {books[checkindex-1].publisheddate}")
+                tempbookinfo["publishedDate"] = input(f"published date: {books[checkindex-1].publishedDate}")
                 tempbookinfo["categories"] = input(f"categories: {books[checkindex-1].categories}")
                 tempbookinfo["averageRating"] = input(f"average rating: {books[checkindex-1].averageRating}")
-                tempbookinfo["pagecount"] = input(f"page count: {books[checkindex-1].pageCount}")
-                tempbookinfo["descirption"] = input(f"desciption: {books[checkindex-1].description}")
-        
-                for i in tempbookinfo:
-                    if i != "N/A":
-                        books[checkindex-1].i = tempbookinfo[i]
-        for i in books:
-            if i.bookcode != None:
-                bookinfo[i.isbn] = {
-                "bookcode": i.bookcode,
-                "bookname":i.bookname,
-                "isbn":i.isbn,
-                "author":i.author,
-                "publisher":i.publisher,
-                "bookcopies":i.bookcopies,
-                "language":i.language,
-                "publishedDate":i.publishedDate,
-                "categories":i.categories,
-                "averageRating":i.averageRating,
-                "pageCount":i.pageCount,
-                "description":i.description
-                }
-            bookstatus[i.isbn] = {"status": "a", "duedata": None}
-        with open("data/BookInfo.json","w") as BookInfoData:
-           json.dump(bookinfo.hashmap, BookInfoData, indent=3)
-        with open("data/BookStatus.json", "w") as BookStatusFile:
-            json.dump(bookstatus.hashmap, BookStatusFile, indent=3)
-
-AddBook()
+                tempbookinfo["pageCount"] = input(f"page count: {books[checkindex-1].pageCount}")
+                tempbookinfo["description"] = input(f"desciption: {books[checkindex-1].description}")
+                for i, j in vars(books[checkindex-1]).items():
+                    if tempbookinfo[i] != "N/A":
+                        setattr(books[checkindex-1], f"{i}", tempbookinfo[i])
+    for i in books:
+        if i.bookcode != None:
+            bookinfo[i.isbn] = {
+            "bookcode": i.bookcode,
+            "bookname":i.bookname,
+            "isbn":i.isbn,
+            "author":i.author,
+            "publisher":i.publisher,
+            "bookcopies":i.bookcopies,
+            "language":i.language,
+            "publishedDate":i.publishedDate,
+            "categories":i.categories,
+            "averageRating":i.averageRating,
+            "pageCount":i.pageCount,
+            "description":i.description
+            }
+            print(bookinfo[i.isbn])
+        bookstatus[i.isbn] = {"status": "a", "duedata": None}
+    with open("data/BookInfo.json","w") as BookInfoData:
+       json.dump(bookinfo.hashmap, BookInfoData, indent=3)
+    with open("data/BookStatus.json", "w") as BookStatusFile:
+        json.dump(bookstatus.hashmap, BookStatusFile, indent=3)

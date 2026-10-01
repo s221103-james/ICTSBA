@@ -18,7 +18,6 @@ nav{
     background-color: rgb(255, 255, 255);
     box-shadow: 3px 3px 5px rgb(54, 54, 54);
 }
-
 nav ul{
     width:100%;
     min-width: max-content;
@@ -27,12 +26,10 @@ nav ul{
     justify-content: flex-end;
     align-items: center;
 }
-
 nav li{
     height:50px;
     position: relative;
 }
-
 nav a{
     height:100%;
     padding: 0 30px;
@@ -41,13 +38,11 @@ nav a{
     color: black;
     text-decoration: none;
 }
-
 nav a:hover{
     background-color: rgb(231, 243, 255);
     box-shadow: 2px 2px 3px rgb(81, 86, 90);
     border-radius: 10px 10px 10px 10px;
 }
-
 nav li:first-child{
     margin-right: auto;
 }
@@ -64,17 +59,108 @@ nav li:first-child{
     width: max-content;   
     position: absolute;*/
 }
-
 .bookcatalogue li, .bookborrowingcompetition li{
     width: 100%;
     height: max-content;
     display: flex;
 }
-
 .bookcatalogue a, .bookborrowingcompetition a{
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     padding: 5px;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+
+#booksearchinputbox{
+    border-radius: 10px;
+    background-color:rgb(231, 243, 255);
+    padding: 10px 20px 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    list-style:none;
+    gap: 8px;
+}
+#booksearchinputbox h1{
+    font-size: 50px;
+}
+#booksearchinputbox h5{
+    font-weight: normal;
+    font-size: 15px;
+}
+#booksearchinputbox > div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#booksearchinputbox input{
+    font-size: 25px;
+    outline: none;
+    width: 250px;
+    height: 50px;
+    border-style: solid;
+    border-width: 2px 2px 2px 0px;
+    border-radius: 0px 5px 5px 0px ;
+    border-color: rgb(255, 255, 255);
+    color: rgb(112, 112, 112);
+    padding: 0px 0px 0px 10px;
+}
+#booksearchinputbox select{
+    font-size: 25px;
+    color:rgb(112, 112, 112);
+    width: 260px;
+    height: 54px;
+    border-style: solid;
+    border-width: 2px 2px 2px 0px;
+    border-radius: 0px 5px 5px 0px ;
+    border-color: white;
+    padding: 0px 0px 0px 10px;
+}
+#booksearchinputbox option{
+    font-size: 15px;
+}
+#booksearchinputbox label{
+    font-size: 23px;
+    width: 170px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-style: solid;
+    border-width: 2px 0px 2px 2px;
+    border-radius: 5px 0px 0px 5px;
+    border-color: rgb(112, 183, 255);
+    background-color: rgb(112, 183, 255);
+}
+
+#booksearchinputbox button{
+    font-size: 25px;
+    color: rgb(238, 247, 255);
+    width: 150px;
+    height: 35px;
+    border: none;
+    border-radius: 50px;
+    background-color: rgb(112, 183, 255);
+    padding: 1px;
+}
+#booksearchinputbox button:hover{
+    background-color: rgb(51, 153, 255);
+}
+
+
+.validation.failed input, select, label{
+    border-color: rgb(223, 39, 39);
+}
+.validation.success input,select,label{
+    border-color: rgb(223, 39, 39);
 }

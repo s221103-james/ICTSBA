@@ -1,11 +1,7 @@
 import json
-from Book.DataFileInitialisation import BookDataHashmapinitialise
+from DataFileInitialisation import BookDataHashmapinitialise
 
 def DeleteBook():
-    with open("data/BookInfo.json") as bookinfofile:
-        data = json.load(bookinfofile)
-        bookinfo = BookDataHashmapinitialise()
-
     with open("data/BookInfo.json") as bookinfofile:
         data = json.load(bookinfofile)
         bookinfo = BookDataHashmapinitialise(data)
@@ -14,12 +10,16 @@ def DeleteBook():
         data = json.load(bookstatusfile)
     bookstatus = BookDataHashmapinitialise(data)
 
-
-    target = input("please input the book code of the book you want to delete")
-    targetindex = target[4:-2]
-    for i in range(len(bookinfo[targetindex])):
-        if bookinfo[targetindex][i][1]["bookcode"] == target:
-            for j in range(i,len(bookinfo[targetindex])-1):
-                bookinfo[targetindex][j] = bookinfo[targetindex][j+1]
-            bookinfo[targetindex][j+1] = [None]
+    checkindex = input("please input the book code of the book you want to delete")
+    checkindexisbn = checkindex[4:-2]
+    for i in range(len(bookinfo[checkindexisbn])):
+        if bookinfo[checkindexisbn][i][1]["bookcode"] == checkindex:
+            checkindexisbn2 = i
+    print(bookinfo[checkindexisbn])
+    for j in range(checkindexisbn2,len(bookinfo[checkindexisbn])-1):
+        bookinfo[checkindexisbn][j][1] = bookinfo[checkindexisbn][j+1][1]
+    bookinfo[checkindexisbn][-1] = [None]
     print("Done")
+    print(bookinfo[checkindexisbn])
+    with open("data/BookInfo.json","w") as BookInfoData:
+        json.dump(bookinfo.hashmap, BookInfoData, indent=3)

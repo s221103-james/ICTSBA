@@ -60,7 +60,7 @@ description : {self.description}
                 if "items" in data:
                     book_info = data["items"][0]["volumeInfo"]
                     bookname = book_info.get("title")
-                    bookcode = f"{book_info.get("language")}-{acqusitionmethod}-{isbn}-{bookcopies}"
+                    bookcode = f"{book_info.get('language')}-{acqusitionmethod}-{isbn}-{bookcopies}"
                     isbn = isbn
                     author = book_info.get("authors")
                     publisher = book_info.get("publisher")

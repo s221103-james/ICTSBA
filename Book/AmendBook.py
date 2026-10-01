@@ -1,49 +1,33 @@
 import json
-from Book.DataFileInitialisation import BookDataHashmapinitialise
+from DataFileInitialisation import BookDataHashmapinitialise
 
-def DeleteBook():
+def AmendBook():
     with open("data/BookInfo.json") as bookinfofile:
         data = json.load(bookinfofile)
-        bookinfo = BookDataHashmapinitialise()
+        bookinfo = BookDataHashmapinitialise(data)
 
-    with open("data/BookStatus.json") as bookstatusfile:
-        data = json.load(bookstatusfile)
-    bookstatus = BookDataHashmapinitialise(data)
-
-
-    target = input("please input the book code of the book you want to amend")
-    targetindex = target[4:-2]
-    for i in range(len(bookinfo[targetindex])):
-        if bookinfo[targetindex][i][1]["bookcode"] == target:
-            print(f"bookname: {bookinfo[targetindex][i][1]['bookname']}")
-            print(f"isbn: {bookinfo[targetindex][i][1]['isbn']}")
-            print(f"book code: {bookinfo[targetindex][i][1]['bookcode']}")
-            print(f"author: {bookinfo[targetindex][i][1]['author']}")
-            print(f"publisher: {bookinfo[targetindex][i][1]['publisher']}")
-            print(f"bookcopies: {bookinfo[targetindex][i][1]['bookcopies']}")
-            print(f"language; {bookinfo[targetindex][i][1]['language']}")
-            print(f"publisheddate: {bookinfo[targetindex][i][1]['publisheddate']}")
-            print(f"categories: {bookinfo[targetindex][i][1]['categories']}")
-            print(f"averageRating: {bookinfo[targetindex][i][1]['averageRating']}")
-            print(f"pagecount: {bookinfo[targetindex][i][1]['pagecount']}")
-            print(f"descirption: {bookinfo[targetindex][i][1]['descirption']}")
-            print(f":book available {bookinfo[targetindex][i][1]['available']}")
+    checkindex = input("please input the bookcode of the book that you can to check(one at a time)")
+    checkindexisbn = checkindex[4:-2]
+    for i in range(len(bookinfo[checkindexisbn])):
+        if bookinfo[checkindexisbn][i][1]["bookcode"] == checkindex:
+            checkindexisbn2 = i
     print("type N/A if there is no need to change the data")
     tempbookinfo = {}
-    print("input the book info that you want to change")
-    tempbookinfo["bookname"] = input(f"book name: ")
-    tempbookinfo["isbn"] = input(f"isbn code: ")
-    tempbookinfo["bookcode"] = input(f"book code: ")
-    tempbookinfo["author"] = input(f"author: ")
-    tempbookinfo["publisher"] = input(f"publisher: ")
-    tempbookinfo["bookcopies"] = input(f"book copies: ")
-    tempbookinfo["language"] = input(f"book language: ")
-    tempbookinfo["publisheddate"] = input(f"published date: ")
-    tempbookinfo["categories"] = input(f"categories: ")
-    tempbookinfo["averageRating"] = input(f"average rating: ")
-    tempbookinfo["pagecount"] = input(f"page count: ")
-    tempbookinfo["descirption"] = input(f"desciption: ")
-    for i in tempbookinfo:
-        if i != "N/A":
-            bookinfo[targetindex][i][1][i] = tempbookinfo[i]
+    tempbookinfo["bookname"] = input(f"book name: {bookinfo[checkindexisbn][checkindexisbn2][1]['bookname']}")
+    tempbookinfo["isbn"] = input(f"isbn code: {bookinfo[checkindexisbn][checkindexisbn2][1]['isbn']}")
+    tempbookinfo["bookcode"] = input(f"book code: {bookinfo[checkindexisbn][checkindexisbn2][1]['bookcode']}")
+    tempbookinfo["author"] = input(f"author: {bookinfo[checkindexisbn][checkindexisbn2][1]['author']}")
+    tempbookinfo["publisher"] = input(f"publisher: {bookinfo[checkindexisbn][checkindexisbn2][1]['publisher']}")
+    tempbookinfo["bookcopies"] = input(f"book copies: {bookinfo[checkindexisbn][checkindexisbn2][1]['bookcopies']}")
+    tempbookinfo["language"] = input(f"book language: {bookinfo[checkindexisbn][checkindexisbn2][1]['language']}")
+    tempbookinfo["publishedDate"] = input(f"published date: {bookinfo[checkindexisbn][checkindexisbn2][1]['publishedDate']}")
+    tempbookinfo["categories"] = input(f"categories: {bookinfo[checkindexisbn][checkindexisbn2][1]['categories']}")
+    tempbookinfo["averageRating"] = input(f"average rating: {bookinfo[checkindexisbn][checkindexisbn2][1]['averageRating']}")
+    tempbookinfo["pageCount"] = input(f"page count: {bookinfo[checkindexisbn][checkindexisbn2][1]['pageCount']}")
+    tempbookinfo["description"] = input(f"desciption: {bookinfo[checkindexisbn][checkindexisbn2][1]['description']}")
+
+    for i in bookinfo[checkindexisbn][checkindexisbn2][1]:
+        if tempbookinfo[i] != "N/A":
+            bookinfo[checkindexisbn][checkindexisbn2][1][i] = tempbookinfo[i]
+    
     print("Done")

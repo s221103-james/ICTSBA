@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add book</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <ul class="navbar">
+            <li><a href="index.html">Library</a></li>
+            <li onclick=showSlidebar('.bookcatalogue')>
+                <a href="#">book catalogue</a>
+                <ul class="bookcatalogue">
+                    <li><a href="searchbook.html">search book</a></li>
+                    <li><a href="addbook.html">add book</a></li>
+                    <li><a href="amendbook.html">amend book</a></li>
+                    <li><a href="deletebook.html">delete book</a></li>
+                </ul>
+            </li>
+            <li onclick=showSlidebar('.bookborrowingcompetition')>
+                <a href="#">book borrowing competition</a>
+                <ul class="bookborrowingcompetition">
+                    <li><a href="#">class borrowing competition</a></li>
+                    <li><a href="#">personal borrowing competition</a></li>
+                    <li><a href="#">houses borrowing competition</a></li>
+                </ul>
+            </li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Login in/Sign up</a></li>
+            <li><a href="#">language</a></li>
+        </ul>
+    </nav>
+    <script>
+        function showSlidebar(z){
+            const bar = document.querySelector(z)
+            if(bar.style.display === "flex"){
+                bar.style.display = "none"
+            }
+            else{
+                bar.style.display = "flex"
+            }
+        }
+    </script>
+    <main>
+        <ul class="booksearchinputbox">
+            <h1>Add new book</h1>
+            <li><input type="text" id="bookname" placeholder="bookname"></li>
+            <li><input type="text" id="bookcode" placeholder="bookcode"></li>
+            <li><input type="text" id="isbn" placeholder="isbn"></li>
+            <li><input type="text" id="author" placeholder="author*"></li>
+            <li><input type="text" id="publisher" placeholder="publisher"></li>
+            <li><input type="text" id="publishedate" placeholder="publishedate"></li>
+            <li><input type="text" id="language" placeholder="language"></li>
+            <select id="catergories">
+                <option id="catergoriesplaceholder" disabled selected hidden>catergories</option>
+                <option value="Antiques & Collectibles">Antiques & Collectibles</option>
+                <option value="Architecture">Architecture</option>
+                <option value="Art">Art</option>
+                <option value="Bibles">Bibles</option>
+                <option value="Biography & Autobiography">Biography & Autobiography</option>
+                <option value="Body, Mind & Spirit">Body, Mind & Spirit</option>
+                <option value="Business & Economics">Business & Economics</option>
+                <option value="Comics & Graphic Novels">Comics & Graphic Novels</option>
+                <option value="Computers">Computers</option>
+                <option value="Cooking">Cooking</option>
+                <option value="Crafts & Hobbies">Crafts & Hobbies</option>
+                <option value="Design">Design</option>
+                <option value="Drama">Drama</option>
+                <option value="Education">Education</option>
+                <option value="Family & Relationships">Family & Relationships</option>
+                <option value="Fiction">Fiction</option>
+                <option value="Foreign Language Study">Foreign Language Study</option>
+                <option value="Games & Activities">Games & Activities</option>
+                <option value="Gardening">Gardening</option>
+                <option value="Health & Fitness">Health & Fitness</option>
+                <option value="History">History</option>
+                <option value="House & Home">House & Home</option>
+                <option value="Humor">Humor</option>
+                <option value="Juvenile Fiction">Juvenile Fiction</option>
+                <option value="Juvenile Nonfiction">Juvenile Nonfiction</option>
+                <option value="Language Arts & Disciplines">Language Arts & Disciplines</option>
+                <option value="Law">Law</option>
+                <option value="Literary Collections">Literary Collections</option>
+                <option value="Literary Criticism">Literary Criticism</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Medical">Medical</option>
+                <option value="Music">Music</option>
+                <option value="Nature">Nature</option>
+                <option value="Performing Arts">Performing Arts</option>
+                <option value="Pets">Pets</option>
+                <option value="Philosophy">Philosophy</option>
+                <option value="Photography">Photography</option>
+                <option value="Poetry">Poetry</option>
+                <option value="Political Science">Political Science</option>
+                <option value="Psychology">Psychology</option>
+                <option value="Reference">Reference</option>
+                <option value="Religion">Religion</option>
+                <option value="Science">Science</option>
+                <option value="Self-HelpSocial Science">Self-HelpSocial Science</option>
+                <option value="Sports & Recreation">Sports & Recreation</option>
+                <option value="Study Aids">Study Aids</option>
+                <option value="Technology & Engineering">Technology & Engineering</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Travel">Travel</option>
+                <option value="True Crime">True Crime</option>
+                <option value="Young Adult Fiction">Young Adult Fiction</option>
+                <option value="Young Adult Nonfiction">Young Adult Nonfiction</option>
+                <!--source from BISG-->
+            </select>
+            <li><input id="averagerating" placeholder="averagerating"></li>
+            <li><input id="bookcopies" placeholder="bookcopies"></li>
+            <li><input id="pagecount" placeholder="pagecount"></li>
+            <h5>* if there are multiple input, split terms by using ","</h5>
+            <li><button type="submit">submit</button></li>
+        </div>
+    </main>
+</body>
+</html>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>search book</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
 </head>
 <body>
     <nav>
@@ -14,9 +15,9 @@
                 <a href="#">book catalogue</a>
                 <ul class="bookcatalogue">
                     <li><a href="searchbook.html">search book</a></li>
-                    <li><a href="#">add book</a></li>
-                    <li><a href="#">amend book</a></li>
-                    <li><a href="#">delete book</a></li>
+                    <li><a href="addbook.html">add book</a></li>
+                    <li><a href="amendbook.html">amend book</a></li>
+                    <li><a href="deletebook.html">delete book</a></li>
                 </ul>
             </li>
             <li onclick=showSlidebar('.bookborrowingcompetition')>
@@ -44,42 +45,121 @@
         }
     </script>
     <main>
-        <div class="booksearchinputbox">
-            <label for="bookname">username: </label>
-            <input id="bookname">
-            <br>
-            <label for="bookcode">bookcode: </label>
-            <input id="bookcode">
-            <br>
-            <label for="isbn">isbn: </label>
-            <input id="isbn">
-            <br>
-            <label for="author">author: </label>
-            <input id="author">
-            <br>
-            <label for="publisher">publisher*: </label>
-            <input id="publisher">
-            <br>
-            <label for="publishedate">published date: </label>
-            <input id="publishedate">
-            <br>
-            <label for="language">language: </label>
-            <input id="language">
-            <br>
-            <label for="catergories">catergories*: </label>
-            <input id="catergories">
-            <br>
-            <label for="averagerating">average rating: </label>
-            <input id="averagerating">
-            <br>
-            <label for="boookcopies">book copies: </label>
-            <input id="boookcopies">
-            <br>
-            <label for="pagecount">page count: </label>
-            <input id="pagecount">
-            <br>
-            * if there are multiple input, split terms by using ","
-        </div>
+        <form id="booksearchinputbox" action="/">
+            <h1>Find your book</h1>
+            <div class="validation">
+                <label for="bookname">Book Name</label>
+                <input type="text" id="bookname" placeholder="bookname">
+                <div class="failed"></div>
+            </div>
+            <div class="validation">
+                <label for="bookcode">Book Code</label>
+                <input type="text" id="bookcode" placeholder="bookcode">
+                <div class="failed"></div>
+            </div>
+            <div class="validation">
+                <label for="isbn">Isbn</label>
+                <input type="text" id="isbn" placeholder="isbn">
+                <div class="failed"></div>
+            </div>
+            <div class="validation">
+                <label for="author">Author</label>
+                <input type="text" id="author" placeholder="author*">
+                <div class="failed"></div>
+            </div>
+            <div class="validation">
+                <label for="publisher">Publisher</label>
+                <input type="text" id="publisher" placeholder="publisher">
+                <div class="failed"></div>
+            </div>
+            <div class="validation">
+                <label for="publishedate">Published Date</label>
+                <input type="date" id="publishedate" placeholder="publishedate">
+                <div class="failed"></div>
+            </div>
+            <div class="validation">
+                <label for="language">Language</label>
+                <input type="text" id="language" placeholder="language">
+                <div class="failed"></div>
+            </div>
+            <div class="validation">
+                <label for="catergories">Catergories</label>
+                <select id="catergories">
+                    <option id="catergoriesplaceholder" disabled selected hidden>catergories</option>
+                    <option value="Antiques & Collectibles">Antiques & Collectibles</option>
+                    <option value="Architecture">Architecture</option>
+                    <option value="Art">Art</option>
+                    <option value="Bibles">Bibles</option>
+                    <option value="Biography & Autobiography">Biography & Autobiography</option>
+                    <option value="Body, Mind & Spirit">Body, Mind & Spirit</option>
+                    <option value="Business & Economics">Business & Economics</option>
+                    <option value="Comics & Graphic Novels">Comics & Graphic Novels</option>
+                    <option value="Computers">Computers</option>
+                    <option value="Cooking">Cooking</option>
+                    <option value="Crafts & Hobbies">Crafts & Hobbies</option>
+                    <option value="Design">Design</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Education">Education</option>
+                    <option value="Family & Relationships">Family & Relationships</option>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Foreign Language Study">Foreign Language Study</option>
+                    <option value="Games & Activities">Games & Activities</option>
+                    <option value="Gardening">Gardening</option>
+                    <option value="Health & Fitness">Health & Fitness</option>
+                    <option value="History">History</option>
+                    <option value="House & Home">House & Home</option>
+                    <option value="Humor">Humor</option>
+                    <option value="Juvenile Fiction">Juvenile Fiction</option>
+                    <option value="Juvenile Nonfiction">Juvenile Nonfiction</option>
+                    <option value="Language Arts & Disciplines">Language Arts & Disciplines</option>
+                    <option value="Law">Law</option>
+                    <option value="Literary Collections">Literary Collections</option>
+                    <option value="Literary Criticism">Literary Criticism</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Medical">Medical</option>
+                    <option value="Music">Music</option>
+                    <option value="Nature">Nature</option>
+                    <option value="Performing Arts">Performing Arts</option>
+                    <option value="Pets">Pets</option>
+                    <option value="Philosophy">Philosophy</option>
+                    <option value="Photography">Photography</option>
+                    <option value="Poetry">Poetry</option>
+                    <option value="Political Science">Political Science</option>
+                    <option value="Psychology">Psychology</option>
+                    <option value="Reference">Reference</option>
+                    <option value="Religion">Religion</option>
+                    <option value="Science">Science</option>
+                    <option value="Self-HelpSocial Science">Self-HelpSocial Science</option>
+                    <option value="Sports & Recreation">Sports & Recreation</option>
+                    <option value="Study Aids">Study Aids</option>
+                    <option value="Technology & Engineering">Technology & Engineering</option>
+                    <option value="Transportation">Transportation</option>
+                    <option value="Travel">Travel</option>
+                    <option value="True Crime">True Crime</option>
+                    <option value="Young Adult Fiction">Young Adult Fiction</option>
+                    <option value="Young Adult Nonfiction">Young Adult Nonfiction</option>
+                    <!--source from BISG-->
+                </select>
+                <div class="failed"></div>
+            </div>
+            <div class="validation">
+                <label for="averagerating">Average Rating</label>
+                <input id="averagerating" placeholder="averagerating">
+                <div class="failed"></div>
+            </div>
+            <div class="validation">
+                <label for="bookcopies">Book Copies</label>
+                <input id="bookcopies" placeholder="bookcopies">
+                <div class="failed"></div>
+            </div>
+            <div class="validation">
+                <label for="pagecount">Page Count</label>
+                <input id="pagecount" placeholder="pagecount">
+                <div class="failed"></div>
+            </div>
+            <h5>* if there are multiple input, split terms by using ","</h5>
+            <div><button type="submit" id="submit">submit</button></div>
+        </form>
     </main>
 </body>
 </html>
