@@ -190,7 +190,7 @@ desciption: {books[checkindex-1].description}
                     if tempbookinfo[i] != "N/A":
                         setattr(books[checkindex-1], f"{i}", tempbookinfo[i])
     for i in books:
-        if i.bookcode != None:
+        if i.bookname != None and i.bookname != "":
             bookinfo[i.isbn] = {
             "bookcode": i.bookcode,
             "bookname":i.bookname,
@@ -205,8 +205,7 @@ desciption: {books[checkindex-1].description}
             "pageCount":i.pageCount,
             "description":i.description
             }
-            print(bookinfo[i.isbn])
-        bookstatus[i.isbn] = {"status": "a", "duedata": None}
+            bookstatus[i.isbn] = {"status": "a", "duedata": None}
     with open("data/BookInfo.json","w") as BookInfoData:
        json.dump(bookinfo.hashmap, BookInfoData, indent=3)
     with open("data/BookStatus.json", "w") as BookStatusFile:

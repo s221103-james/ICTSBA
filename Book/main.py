@@ -12,7 +12,6 @@ def main():
     match choice:
         case "1":
             ReadBook()
-            print(132456)
         case "2":
             AddBook()
         case "3":

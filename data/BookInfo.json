@@ -709,7 +709,29 @@
    [],
    [],
    [],
-   [],
+   [
+      [
+         "9789887497820",
+         {
+            "bookcode": "e-b-9789887497820",
+            "bookname": "ICT for IGeneration Information Processing Compulsory A1",
+            "isbn": "9789887497820",
+            "author": [
+               "Wilton Fok"
+            ],
+            "publisher": "Hong Kong Unific Publishing Limited",
+            "bookcopies": "1",
+            "language": "en",
+            "publishedDate": "2022",
+            "categories": [
+               "Computer networks"
+         ],
+            "averageRating": "4.5",
+            "pageCount": "131",
+            "description": "DSE ICT Compulsory A1"
+         }
+      ]
+   ],
    [],
    [],
    [],
@@ -740,7 +762,25 @@
          }
       ],
       [
-         null
+         "9789887497981",
+         {
+            "bookcode": "e-b-9789887497981-2",
+            "bookname": "ICT for IGeneration",
+            "isbn": "9789887497981",
+            "author": [
+               "Wilton Fok"
+            ],
+            "publisher": "Hong Kong Unific Publishing Limited",
+            "bookcopies": "1",
+            "language": "en",
+            "publishedDate": "2022",
+            "categories": [
+               "Computer networks"
+            ],
+            "averageRating": "5.0",
+            "pageCount": "346",
+            "description": "DSEICT Elective C"
+         }
       ]
    ],
    [],
