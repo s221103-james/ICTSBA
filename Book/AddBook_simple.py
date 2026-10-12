@@ -37,8 +37,10 @@ description : {self.description}
         found = False
         while not found:
             headers = {"User-Agent": "BookInfo (s221103@sttss.edu.hk)"} #enter the sch staff email
-            apikey  = "AIzaSyDVvbCUM8MBZjQNns-7oHeAQFhAXQW2uZE"
+            apikey  = "AIzaSyBHwa3fpQoE1-Hwwra0DUrtEzb68ybytR4"
             url = f"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn}&key={apikey}"
+            #url = f"https://googleapis.com{isbn}&key={apikey}"
+            bookname = None
             try:
                 response = requests.get(url, headers=headers, timeout= 10)
                 data = response.json()
@@ -70,15 +72,38 @@ description : {self.description}
                         description = "N/A"
                     found = True
                 elif "error" in data:
-                    apikey = (input("Invalid api key, please re-enter it")).strip()
+                    print(data)
+                    apikey_temp = (input("Invalid api key, please re-enter it, type 0 to input the data manually")).strip()
+                    if apikey_temp == "0":
+                        break
+                    else:
+                        apikey = apikey_temp
                 else:
-                    found = True
-                    bookname,bookcode,author,publisher,bookcopies,language,publishedDate,categories,averageRating,pageCount,description = None ,None, None, None, None, None, None, None, None, None, None
-                    isbn = isbn
+                    found_temp = input("no book found, re-enter the isbn code, type 0 to input the data manually")
+                    if found_temp == "0":
+                        found = True
+                        bookname = None
+                    else:
+                        isbn = found_temp
             except requests.exceptions.RequestException as error:
                 print("Network Error, please try again")
+                break
             except requests.exceptions.ConnectionError as error:
-                print("Connection Error, please ret again")
+                print("Connection Error, please try again")
+                break
+        if bookname == None :
+            bookname = input("book name: ")
+            isbn = input("isbn code: ")
+            bookcode = input("book code: ")
+            author = input("author: ")
+            publisher = input("publisher: ")
+            bookcopies = input("book copies: ")
+            language = input("book language: ")
+            publishedDate = input("published date: ")
+            categories = input("categories: ")
+            averageRating = input("average rating: ")
+            pageCount = input("page count: ")
+            description = input("desciption: ")
         return cls(bookname,bookcode,isbn,author,publisher,bookcopies,language,publishedDate,categories,averageRating,pageCount,description)
 
         

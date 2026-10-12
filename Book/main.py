@@ -1,4 +1,4 @@
-from ReadBook import ReadBook
+from ReadBook2 import ReadBook2
 from AddBook_simple import AddBook
 from AmendBook import AmendBook
 from DeleteBook_simple import DeleteBook
@@ -11,7 +11,7 @@ def main():
     choice = str(input("input your choice by typing the index"))
     match choice:
         case "1":
-            ReadBook()
+            ReadBook2()
         case "2":
             AddBook()
         case "3":
