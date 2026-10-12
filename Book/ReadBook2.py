@@ -215,5 +215,3 @@ def ReadBook2():
         else:
             print("no more similar result")
         print("all result is shown")
-
-ReadBook2()
