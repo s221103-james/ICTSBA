@@ -1,0 +1,73 @@
+import requests
+import json
+
+class BookDataHashmapinitialise:
+    def __init__(self, data):
+        self.range = 30000
+        self.hashmap = data
+
+    def GetHashIndex(self, key):
+        Index = 0
+        for i in str(key):
+            Index += ord(i)
+            Index = Index % self.range
+        return Index
+    
+    def __setitem__(self, key, data):
+        index = self.GetHashIndex(key)
+        exist = False
+        if len(self.hashmap[index]) >= 1:
+            if self.hashmap[index][-1] == None:
+                self.hashmap[index][-1] = [key, data]
+            else:
+                self.hashmap[index].append([key, data])
+        else:
+            self.hashmap[index].append([key, data])
+
+    def __getitem__(self, key):
+        index = self.GetHashIndex(key)
+        return self.hashmap[index]
+
+with open("data/BookInfo.json") as bookinfofile:
+        data = json.load(bookinfofile)
+bookinfo = BookDataHashmapinitialise(data)
+
+with open("data/BookStatus.json") as bookstatusfile:
+    data = json.load(bookstatusfile)
+bookstatus = BookDataHashmapinitialise(data)
+
+
+bookcode= "e-b-9789887497820-1",
+bookname= "ICT for IGeneration Information Processing Compulsory A1",
+isbn= "9789887497820",
+author= ["Wilton Fok"]
+publisher= "Hong Kong Unific Publishing Limited",
+bookcopies= "1",
+language= "en",
+publishedDate= "2022",
+categories= ["Computer networks"]
+averageRating= "4.5",
+pageCount= "131",
+description= "DSE ICT Compulsory A1"
+
+
+bookinfo[isbn] += [isbn, {
+"bookcode": bookcode,
+"bookname":bookname,
+"isbn":isbn,
+"author":author,
+"publisher":publisher,
+"bookcopies":bookcopies,
+"language":language,
+"publishedDate":publishedDate,
+"categories":categories,
+"averageRating":averageRating,
+"pageCount":pageCount,
+"description":description
+}]
+bookstatus[isbn] += [isbn, {"status": "a", "duedata": None}]
+
+with open("data/BookInfo.json","w") as BookInfoData:
+   json.dump(bookinfo.hashmap, BookInfoData, indent=3)
+with open("data/BookStatus.json", "w") as BookStatusFile:
+    json.dump(bookstatus.hashmap, BookStatusFile, indent=3)

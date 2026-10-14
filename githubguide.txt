@@ -1,0 +1,17 @@
+git checkout -b [YOUR_BRANCH_NAME]
+
+git add .
+git commit -m "[YOUR_COMMIT_MESSAGE]"
+
+git push -u origin [YOUR_BRANCH_NAME]
+
+
+git checkout main
+
+git pull
+
+git merge [YOUR_BRANCH_NAME]
+
+git push
+
+git branch -d [YOUR_BRANCH_NAME]

@@ -1,6 +1,6 @@
 import json
 
-from DataFileInitialisation import BookDataHashmapinitialise
+from Book.DataFileInitialisation import BookDataHashmapinitialise
 
 class BookData:
     def __init__(self,bookname,bookcode,isbn,author,publisher,bookcopies,language,publishedDate,categories,averageRating,pageCount):

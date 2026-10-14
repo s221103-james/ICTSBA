@@ -36,8 +36,8 @@ description : {self.description}
     def get(cls, acqusitionmethod, isbn, bookcopies):
         found = False
         while not found:
-            headers = {"User-Agent": "BookInfo (s221103@sttss.edu.hk)"} #enter the sch staff email
-            apikey  = "AIzaSyBHwa3fpQoE1-Hwwra0DUrtEzb68ybytR4"
+            headers = {"User-Agent": "BookInfo (...)"} #enter the sch staff email
+            apikey  = "..."
             url = f"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn}&key={apikey}"
             #url = f"https://googleapis.com{isbn}&key={apikey}"
             bookname = None

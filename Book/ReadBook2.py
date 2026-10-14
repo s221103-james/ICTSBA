@@ -34,11 +34,8 @@ class BookData:
     @classmethod
     def get(cls):
         bookname = input("bookname: ")
-
         bookcode = input("bookcode: ")
-
         isbn = input("isbn: ")
-
         check = False
         while not check:
             acqusitionmethod = str.strip(input("acqusition method. bought/donated"))
@@ -52,30 +49,21 @@ class BookData:
                 check = True
             else:
                 print("invalid input for acqusitionmethod")
-
         author = input("author(split authors by using ,): ").split(",")
-
         publisher = input("publisher: ")
-
         publishedDate = input("published date: ")
-
         language = input("language: ")
-
         if language == "english" or language == "English":
             bookcodelanguage_temp = "e"
         elif language == "chinese" or language == "Chinese":
             bookcodelanguage_temp = "c"
         else:
                 bookcodelanguage_temp = "o"
-
         categories = input("catergories(split terms by using ,): ").split(",")
-
         averageRating = input("average rating: ")
-
         bookcopies = input("book copies: ")
 
         pageCount = input("page count: ")
-
         if bookcode != "N/A" and isbn != "N/A" and bookcopies != "N/A" and acqusitionmethod != "N/A" and language != "N/A":
             bookcode = f"{bookcodelanguage_temp}-{acqusitionmethod}-{isbn}-{bookcopies}"
 
@@ -96,6 +84,18 @@ def OutputUI(z):
     print(f"description: {z['description']}")
     print(f"book available: {z['status']}")
 
+def isbncheck(added, targetarray):
+    min = len(targetarray)-added
+    for j in range(len(targetarray)-1-1, len(targetarray)-added-1, -1):
+        k = j
+        while k >= min:
+            if targetarray[j]["isbn"] == targetarray[j+1]["isbn"]:
+                targetarray[j]["status"] += targetarray[j+1]["status"]
+                targetarray[j+1] = None
+                targetarray.pop()
+                break
+            k -= 1
+
 def ReadBook2():
     with open("data/BookInfo.json") as bookinfofile:
             data = json.load(bookinfofile)
@@ -107,6 +107,8 @@ def ReadBook2():
     target = BookData.get()
     check = 0
     checkauthor = None
+
+
     for i in target.targetcondition:
         check += len(target.targetcondition[i])
         if i == "author":
@@ -114,24 +116,38 @@ def ReadBook2():
             target.authorfound = [[]*checkauthor]
 
     if target.bookcode != "N/A":
+        added_sub = 0
         for i in range(len(bookinfo[target.isbn])):
             if bookinfo[target.isbn][i][1]["bookcode"] == target.bookcode:
                 target.targetfound += [bookinfo[target.isbn][i][1]]
+                target.targetfound[-1]["status"] = 0
+                if bookstatus[target.isbn][i][1]["status"] == "a":
+                    target.targetfound[-1]["status"] += 1
             if bookinfo[target.isbn][i][0] == target.isbn:
                 target.subtargetfound += [bookinfo[target.isbn][i][1]]
+                target.subtargetfound[-1]["status"] = 0
+                if bookstatus[target.isbn][i][1]["status"] == "a":
+                    target.subtargetfound[-1]["status"] += 1
+                added_sub += 1
+        isbncheck(added_sub, target.subtargetfound)
 
     elif target.isbn != "N/A":
+        added = 0
         for i in range(len(bookinfo[target.isbn])):
                 if bookinfo[target.isbn][i][0] == target.isbn:
                     target.targetfound += [bookinfo[target.isbn][i][j]]
+                    added += 1
+        isbncheck(added, target.targetfound)
 
 
     else:
-        for i in range(len(bookinfo.hashmap)): #each hashcode
-            for j in range(len(bookinfo.hashmap[i])): #same hashcode
-                #check no. if print or not
+        for i in range(len(bookinfo.hashmap)):
+            added = 0
+            added_sub = 0
+            added_author = 0
+            for j in range(len(bookinfo.hashmap[i])):
                 if len(target.targetfound) %10 == 0 and len(target.targetfound) >= 20:
-                    for z in range(len(target.targetfound)-20, len(target.targetfound)-9):
+                    for z in range(len(target.targetfound)-20, len(target.targetfound)-10-1):
                         print(f"{z+1}:bookname: {target.targetfound[z]['bookname']}, isbn: {target.targetfound[z]['isbn']}, book code: {target.targetfound[z]['bookcode']}, author: {target.targetfound[z]['author']}, publisher: {target.targetfound[z]['publisher']}")
                     while True:
                         choice = input("check on some of the book information in detail?type the index or type No")
@@ -150,10 +166,25 @@ def ReadBook2():
                                 temp_check -= 1
                                 if k == "author":
                                     target.authorfound[m] += [bookinfo.hashmap[i][j][1]]
+                                    target.authorfound[-1]["status"] = 0
+                                    if bookstatus[target.isbn][i][1]["status"] == "a":
+                                        target.authorfound[-1]["status"] += 1
+                                    added_author += 1
                 if temp_check == 0:
                     target.targetfound += [bookinfo.hashmap[i][j][1]]
+                    target.targetfound[-1]["status"] = 0
+                    if bookstatus[target.isbn][i][1]["status"] == "a":
+                        target.targetfound[-1]["status"] += 1
+                    added += 1
                 if temp_check == 1:
                     target.subtargetfound += [bookinfo.hashmap[i][j][1]]
+                    target.subtargetfound[-1]["status"] = 0
+                    if bookstatus[target.isbn][i][1]["status"] == "a":
+                        target.subtargetfound[-1]["status"] += 1
+                    added_sub += 1
+            isbncheck(added, target.targetfound)
+            isbncheck(added_sub, target.subtargetfound)
+            isbncheck(added_author, target.authorfound)
     if (len(target.targetfound)/2) < 20:
         for z in range(len(target.targetfound)):
             print(f"{z+1}: bookname: {target.targetfound[z]['bookname']}, isbn: {target.targetfound[z]['isbn']}, book code: {target.targetfound[z]['bookcode']}, author: {target.targetfound[z]['author']}, publisher: {target.targetfound[z]['publisher']}")
@@ -168,16 +199,11 @@ def ReadBook2():
     if choice == "Yes":
         if len(target.subtargetfound) >= 1:
             print("here are some books that is similar")
-            finish = False
-            n = len(target.subtargetfound)
-            max = (math.ceil(n/10))*10
-            min = (math.floor(n/10))*10
-            count = (math.floor(n/10))*10
-            if count == 0:
-                max = n
-            print(max,min,count)
-            while not finish and count >= 0:
-                for z in range(min-count, max-count):
+            n = (math.ceil(target.subtargetfound/10))*10
+            for i in range(3,-1,-1):
+                if i == 0:
+                    n = len(target.subtargetfound)
+                for z in range(30-i*10, n-i*10):
                     print(f"{z+1}:bookname: {target.subtargetfound[z]['bookname']}, isbn: {target.subtargetfound[z]['isbn']}, book code: {target.subtargetfound[z]['bookcode']}, author: {target.subtargetfound[z]['author']}, publisher: {target.subtargetfound[z]['publisher']}")
                 while True:
                     choice = input("check on some of the book information in detail?type the index or type No")
@@ -185,23 +211,16 @@ def ReadBook2():
                         OutputUI(target.authorfound[choice-1])
                     else:
                         break
-                count -= 10
-                if count == 0:
-                    max = n
                 choice = input("next page?Yes/No ")
                 if choice == "No":
-                    finish = True
+                    break
         elif len(target.authorfound) >= 1:
             print("here are some books with the same author")
-            finish = False
-            n = len(target.authorfound)
-            max = (math.ceil(n/10))*10
-            min = (math.floor(n/10))*10
-            count = (math.floor(n/10))*10
-            if count == 0:
-                max = n
-            while not finish:
-                for z in range(min-count, max-count):
+            n = (math.ceil(target.authorfound/10))*10
+            for i in range(3,-1,-1):
+                if i == 0:
+                    n = len(target.authorfound)
+                for z in range(30-i*10, n-i*10):
                     print(f"{z+1}:bookname: {target.authorfound[z]['bookname']}, isbn: {target.authorfound[z]['isbn']}, book code: {target.authorfound[z]['bookcode']}, author: {target.authorfound[z]['author']}, publisher: {target.authorfound[z]['publisher']}")
                 while True:
                     choice = input("check on some of the book information in detail?type the index or type No")
@@ -209,9 +228,9 @@ def ReadBook2():
                         OutputUI(target.authorfound[choice-1])
                     else:
                         break
-                count -= 10
-                if count == 0:
-                    max = n
+                choice = input("next page?Yes/No ")
+                if choice == "No":
+                    break
         else:
             print("no more similar result")
         print("all result is shown")
