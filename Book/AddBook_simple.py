@@ -37,7 +37,7 @@ description : {self.description}
         found = False
         while not found:
             headers = {"User-Agent": "BookInfo (s221103@sttss.edu.hk)"} #enter the sch staff email
-            apikey  = "AIzaSyBHwa3fpQoE1-Hwwra0DUrtEzb68ybytR4"
+            apikey  = "..."
             url = f"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn}&key={apikey}"
             #url = f"https://googleapis.com{isbn}&key={apikey}"
             bookname = None
