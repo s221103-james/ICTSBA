@@ -51,7 +51,7 @@ description : {self.description}
         found = False
         while not found:
             headers = {"User-Agent": "BookInfo (s221103@sttss.edu.hk)"} #enter the sch staff email
-            apikey  = "AIzaSyDVvbCUM8MBZjQNns-7oHeAQFhAXQW2uZE"
+            apikey  = "..."
             openlibraryurl = f"https://openlibrary.org/api/books?bibkeys=ISBN:{isbn}&format=json&jscmd=data"
             url = f"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn}&key={apikey}"
             try:
